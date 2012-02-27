@@ -1,5 +1,5 @@
 # This is the product configuration for a full droid2
-DEVICE_PREBUILT := device/motorola/droid2/prebuilt
+DEVICE_PREBUILT := device/moto/droid2/prebuilt
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
@@ -51,7 +51,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.camera.calresolution=3264,2448
 
 # Device overlay
-DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2/overlay
+DEVICE_PACKAGE_OVERLAYS += device/moto/droid2/overlay
 
 # high-density artwork where available
 PRODUCT_AAPT_CONFIG := normal hdpi
@@ -64,8 +64,8 @@ PRODUCT_PACKAGES := \
 
 # Audio
 PRODUCT_COPY_FILES += \
-    device/motorola/droid2/audio/libaudio.so:/system/lib/libaudio.so \
-    device/motorola/droid2/audio/liba2dp.so:/system/lib/liba2dp.so
+    device/moto/droid2/audio/libaudio.so:/system/lib/libaudio.so \
+    device/moto/droid2/audio/liba2dp.so:/system/lib/liba2dp.so
 
 PRODUCT_PACKAGES += \
     audio.primary.omap3 \
@@ -168,19 +168,19 @@ PRODUCT_LOCALES += en_US
 
 # these need to be here for the installer, just put them here for now
 PRODUCT_COPY_FILES += \
-    device/motorola/droid2/releaseutils/mke2fs:system/bin/mke2fs \
-    device/motorola/droid2/releaseutils/tune2fs:system/bin/tune2fs \
-    device/motorola/droid2/releaseutils/check_kernel:system/etc/releaseutils/check_kernel \
-    device/motorola/droid2/releaseutils/finalize_release:system/etc/finalize_release
+    device/moto/droid2/releaseutils/mke2fs:system/bin/mke2fs \
+    device/moto/droid2/releaseutils/tune2fs:system/bin/tune2fs \
+    device/moto/droid2/releaseutils/check_kernel:system/etc/releaseutils/check_kernel \
+    device/moto/droid2/releaseutils/finalize_release:system/etc/finalize_release
 
 # copy all kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell \
-    find device/motorola/droid2/prebuilt/lib/modules -name '*.ko' \
+    find device/moto/droid2/prebuilt/lib/modules -name '*.ko' \
     | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
     | tr '\n' ' ')
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/motorola/droid2/prebuilt/kernel
+LOCAL_KERNEL := device/moto/droid2/prebuilt/kernel
 else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
