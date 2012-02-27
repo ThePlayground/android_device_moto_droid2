@@ -29,7 +29,7 @@ BOARD_KERNEL_BASE := 0x10000000
 ENABLE_SENSORS_COMPAT := true
 
 # Overlay
-TARGET_CUSTOM_OVERLAY := device/moto/droid2/overlayhal/Overlay.cpp
+TARGET_CUSTOM_OVERLAY := device/moto/droid2/devicehal/ui/Overlay.cpp
 
 # Do da wifi
 BOARD_WPA_SUPPLICANT_DRIVER := CUSTOM
