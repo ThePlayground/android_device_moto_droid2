@@ -1,6 +1,6 @@
-LOCAL_PATH := $(call my-dir)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2)
 
-ifeq ($(TARGET_DEVICE),droid2)
+LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
@@ -26,4 +26,4 @@ LOCAL_SHARED_LIBRARIES += libdl
 
 include $(BUILD_SHARED_LIBRARY)
 
-endif #TARGET_DEVICE
+endif

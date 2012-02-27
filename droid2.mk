@@ -5,8 +5,10 @@ DEVICE_PREBUILT := device/motorola/droid2/prebuilt
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
 ## (2) Also get non-open-source GSM-specific aspects if available
-$(call inherit-product-if-exists, vendor/htc/mecha/mecha-vendor.mk)
-$(call inherit-product-if-exists, vendor/twisted/google-facelock.mk)
+$(call inherit-product, vendor/motorola/droid2/droid2-vendor.mk)
+$(call inherit-product-if-exists, vendor/twisted/twisted-vendor.mk)
+$(call inherit-product-if-exists, vendor/twisted/google-vendor.mk)
+
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.ril=yes \
@@ -173,12 +175,12 @@ PRODUCT_COPY_FILES += \
 
 # copy all kernel modules under the "modules" directory to system/lib/modules
 PRODUCT_COPY_FILES += $(shell \
-    find device/motorola/droid2/modules -name '*.ko' \
+    find device/motorola/droid2/prebuilt/lib/modules -name '*.ko' \
     | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
     | tr '\n' ' ')
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/motorola/droid2/kernel
+LOCAL_KERNEL := device/motorola/droid2/prebuilt/kernel
 else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -186,7 +188,6 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
-$(call inherit-product, vendor/motorola/droid2/droid2-vendor.mk)
 $(call inherit-product, vendor/cm/config/gsm.mk)
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, build/target/product/full_base.mk)

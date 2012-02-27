@@ -1,3 +1,5 @@
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2)
+
 # Copyright 2005 The Android Open Source Project
 
 LOCAL_PATH:= $(call my-dir)
@@ -19,3 +21,4 @@ LOCAL_MODULE:= charge_only_mode
 
 include $(BUILD_EXECUTABLE)
 
+endif

@@ -1,3 +1,5 @@
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2)
+
 ifeq ($(BOARD_USES_AUDIO_LEGACY),true)
 
 LOCAL_PATH := $(call my-dir)
@@ -23,3 +25,5 @@ $(file) : device/motorola/droid2/audio/liba2dp.so
 include $(all-subdir-makefiles)
 
 endif # BOARD_USES_AUDIO_LEGACY
+
+endif

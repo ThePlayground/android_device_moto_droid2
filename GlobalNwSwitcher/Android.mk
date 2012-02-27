@@ -1,3 +1,5 @@
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2)
+
 # Copyright 2011 Motorola Mobility
 
 LOCAL_PATH:= $(call my-dir)
@@ -11,3 +13,5 @@ LOCAL_PACKAGE_NAME := GlobalNwSwitch
 LOCAL_CERTIFICATE := platform
 
 include $(BUILD_PACKAGE)
+
+endif
