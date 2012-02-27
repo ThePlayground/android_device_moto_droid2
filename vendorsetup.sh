@@ -21,4 +21,3 @@
 # function: add_lunch_combo generic-eng
 
 add_lunch_combo moto_droid2-userdebug
-add_lunch_combo moto_droid2-eng
