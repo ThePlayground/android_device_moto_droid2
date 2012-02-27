@@ -9,6 +9,9 @@ $(call inherit-product, vendor/motorola/droid2/droid2-vendor.mk)
 $(call inherit-product-if-exists, vendor/twisted/twisted-vendor.mk)
 $(call inherit-product-if-exists, vendor/twisted/google-vendor.mk)
 
+# Inherit Language Files
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.ril=yes \
@@ -102,7 +105,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(DEVICE_PREBUILT)/bin/hijack:system/bin/hijack \
     $(DEVICE_PREBUILT)/bin/hijack.log_dump:system/bin/hijack.log_dump \
-    $(DEVICE_PREBUILT)/etc/hijack-boot.zip:system/etc/hijack-boot.zip \
+    $(DEVICE_PREBUILT)/etc/hijack-boot.zip:system/etc/hijack-boot.zip
+
+# GSM APN list
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # Permissions files
 PRODUCT_COPY_FILES += \
@@ -126,8 +133,7 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PREBUILT)/etc/gps.conf:system/etc/gps.conf \
     $(DEVICE_PREBUILT)/etc/media_profiles.xml:system/etc/media_profiles.xml \
     $(DEVICE_PREBUILT)/etc/powervr.ini:system/etc/powervr.ini \
-    $(DEVICE_PREBUILT)/etc/vold.fstab:system/etc/vold.fstab \
-    $(DEVICE_PREBUILT)/media/bootanimation.zip:system/media/bootanimation.zip
+    $(DEVICE_PREBUILT)/etc/vold.fstab:system/etc/vold.fstab
 
 # Graphics
 PRODUCT_COPY_FILES += \
@@ -188,8 +194,6 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
-$(call inherit-product, vendor/cm/config/gsm.mk)
-$(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 
 PRODUCT_NAME := moto_droid2
@@ -201,6 +205,3 @@ PRODUCT_SFX := vzw
 
 # Release name and versioning
 PRODUCT_RELEASE_NAME := Droid2
-
-UTC_DATE := $(shell date +%s)
-DATE := $(shell date +%Y%m%d)
