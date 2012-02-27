@@ -192,7 +192,7 @@ $(call inherit-product, vendor/cm/config/gsm.mk)
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 
-PRODUCT_NAME := cm_droid2
+PRODUCT_NAME := moto_droid2
 PRODUCT_BRAND := verizon
 PRODUCT_DEVICE := droid2
 PRODUCT_MODEL := Droid2
