@@ -28,6 +28,9 @@ BOARD_KERNEL_BASE := 0x10000000
 # Sensors
 ENABLE_SENSORS_COMPAT := true
 
+# Overlay
+TARGET_CUSTOM_OVERLAY := device/motorola/droid2/overlayhal/Overlay.cpp
+
 # Do da wifi
 BOARD_WPA_SUPPLICANT_DRIVER := CUSTOM
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := libCustomWifi
