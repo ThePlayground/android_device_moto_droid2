@@ -5,7 +5,7 @@ USE_CAMERA_STUB := false
 BOARD_USE_LEGACY_TOUCHSCREEN := true
 
 # inherit from the proprietary version
--include vendor/moto/droid2/BoardConfigVendor.mk
+-include vendor/motorola/droid2/BoardConfigVendor.mk
 
 # Processor
 TARGET_NO_BOOTLOADER := true
