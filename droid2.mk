@@ -4,6 +4,50 @@ DEVICE_PREBUILT := device/motorola/droid2/prebuilt
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
+## (2) Also get non-open-source GSM-specific aspects if available
+$(call inherit-product-if-exists, vendor/htc/mecha/mecha-vendor.mk)
+$(call inherit-product-if-exists, vendor/twisted/google-facelock.mk)
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.kernel.android.ril=yes \
+    persist.ril.mux.noofchannels=7 \
+    persist.ril.mux.ttydevice=/dev/ttyS0 \
+    persist.ril.modem.ttydevice=/dev/usb/tty1-3:1.0 \
+    persist.ril.features=0x07 \
+    persist.ril.mux.retries=500 \
+    persist.ril.mux.sleep=2 \
+    ro.product.multi_touch_enabled=true \
+    ro.product.max_num_touch=2 \
+    ro.telephony.sms_segment_size=160 \
+    ro.setupwizard.mode=OPTIONAL \
+    ro.com.google.gmsversion=2.2_r7 \
+    ro.telephony.call_ring.multiple=false \
+    ro.telephony.call_ring.delay=1000 \
+    ro.setupwizard.enable_bypass=1 \
+    ro.com.google.clientid=android-motorola \
+    ro.com.google.clientidbase=android-verizon \
+    ro.com.google.clientidbase.am=android-verizon \
+    ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
+    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
+    ro.cdma.home.operator.numeric=310004 \
+    ro.cdma.home.operator.alpha=Verizon \
+    ro.config.vc_call_vol_steps=10 \
+    ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
+    ro.cdma.data_retry_config=default_randomization=2000,0,0,120000,180000,540000,960000 \
+    ro.com.motorola.smartsensor=true \
+    ro.media.capture.maxres=5m \
+    ro.media.capture.fast.fps=4 \
+    ro.media.capture.slow.fps=60 \
+    ro.media.capture.flash=led \
+    ro.media.capture.classification=classF \
+    ro.media.capture.useDFR=1 \
+    ro.media.capture.torchIntensity=45 \
+    ro.media.camera.focal=3564.0,3564.0 \
+    ro.media.camera.principal=1632.0,1224.0 \
+    ro.media.camera.skew=0.0 \
+    ro.media.camera.distortion=0.0,0.0,0.0,0.0,0.0 \
+    ro.media.camera.calresolution=3264,2448
+
 # Device overlay
 DEVICE_PACKAGE_OVERLAYS += device/motorola/droid2/overlay
 
@@ -43,8 +87,7 @@ PRODUCT_PACKAGES += \
     wlan_loader
 
 PRODUCT_PACKAGES += \
-    Superuser \
-    su \
+    Droid2Bootstrap \
     hijack-boot.zip \
     mot_boot_mode \
     charge_only_mode
@@ -134,46 +177,6 @@ PRODUCT_COPY_FILES += $(shell \
     | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
     | tr '\n' ' ')
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.kernel.android.ril=yes \
-    persist.ril.mux.noofchannels=7 \
-    persist.ril.mux.ttydevice=/dev/ttyS0 \
-    persist.ril.modem.ttydevice=/dev/usb/tty1-3:1.0 \
-    persist.ril.features=0x07 \
-    persist.ril.mux.retries=500 \
-    persist.ril.mux.sleep=2 \
-    ro.product.multi_touch_enabled=true \
-    ro.product.max_num_touch=2 \
-    ro.telephony.sms_segment_size=160 \
-    ro.setupwizard.mode=OPTIONAL \
-    ro.com.google.gmsversion=2.2_r7 \
-    ro.telephony.call_ring.multiple=false \
-    ro.telephony.call_ring.delay=1000 \
-    ro.setupwizard.enable_bypass=1 \
-    ro.com.google.clientid=android-motorola \
-    ro.com.google.clientidbase=android-verizon \
-    ro.com.google.clientidbase.am=android-verizon \
-    ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
-    ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
-    ro.cdma.home.operator.numeric=310004 \
-    ro.cdma.home.operator.alpha=Verizon \
-    ro.config.vc_call_vol_steps=10 \
-    ro.cdma.homesystem=64,65,76,77,78,79,80,81,82,83 \
-    ro.cdma.data_retry_config=default_randomization=2000,0,0,120000,180000,540000,960000 \
-    ro.com.motorola.smartsensor=true \
-    ro.media.capture.maxres=5m \
-    ro.media.capture.fast.fps=4 \
-    ro.media.capture.slow.fps=60 \
-    ro.media.capture.flash=led \
-    ro.media.capture.classification=classF \
-    ro.media.capture.useDFR=1 \
-    ro.media.capture.torchIntensity=45 \
-    ro.media.camera.focal=3564.0,3564.0 \
-    ro.media.camera.principal=1632.0,1224.0 \
-    ro.media.camera.skew=0.0 \
-    ro.media.camera.distortion=0.0,0.0,0.0,0.0,0.0 \
-    ro.media.camera.calresolution=3264,2448
-
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_KERNEL := device/motorola/droid2/kernel
 else
@@ -183,10 +186,20 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
-$(call inherit-product, hardware/ti/omap3/Android.mk)
 $(call inherit-product, vendor/motorola/droid2/droid2-vendor.mk)
+$(call inherit-product, vendor/cm/config/gsm.mk)
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 
 PRODUCT_NAME := cm_droid2
+PRODUCT_BRAND := verizon
 PRODUCT_DEVICE := droid2
+PRODUCT_MODEL := Droid2
+PRODUCT_MANUFACTURER := Motorola
+PRODUCT_SFX := vzw
+
+# Release name and versioning
+PRODUCT_RELEASE_NAME := Droid2
+
+UTC_DATE := $(shell date +%s)
+DATE := $(shell date +%Y%m%d)
