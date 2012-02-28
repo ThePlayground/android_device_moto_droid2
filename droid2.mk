@@ -60,31 +60,42 @@ DEVICE_PACKAGE_OVERLAYS += device/moto/droid2/overlay
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
-PRODUCT_PACKAGES := \
-    rild \
-    libril \
-    libreference-ril
-
 # Audio
 PRODUCT_COPY_FILES += \
     device/moto/droid2/audio/libaudio.so:/system/lib/libaudio.so \
     device/moto/droid2/audio/liba2dp.so:/system/lib/liba2dp.so
 
-PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES := \
     audio.primary.omap3 \
     libaudiohw_legacy \
     audio.a2dp.default \
     libaudioutils
 
-# Modem
-PRODUCT_PACKAGES += \
-    libreference-cdma-sms \
-    radiooptions
-
 # HW Libs
 PRODUCT_PACKAGES += \
     hwcomposer.default \
-    camera.droid2 \
+    camera.droid2
+
+# Modem
+PRODUCT_PACKAGES += \
+    libreference-cdma-sms \
+    radiooptions \
+    hcitools \
+    hciattach \
+    hcidump 
+
+# OMX
+PRODUCT_PACKAGES += \
+    dspexec \
+    libbridge \
+    libstagefrighthw \
+    libstagefright_omx
+
+# Radio
+PRODUCT_PACKAGES += \
+    rild \
+    libril \
+    libreference-ril
 
 # Wifi
 PRODUCT_PACKAGES += \
@@ -157,6 +168,7 @@ PRODUCT_COPY_FILES += \
 # Key Layouts
 PRODUCT_COPY_FILES += \
     $(DEVICE_PREBUILT)/usr/idc/cpcap-key.idc:system/usr/idc/cpcap-key.idc \
+    $(DEVICE_PREBUILT)/usr/idc/light-prox.idc:system/usr/idc/light-prox.idc \
     $(DEVICE_PREBUILT)/usr/idc/qtouch-touchscreen.idc:system/usr/idc/qtouch-touchscreen.idc \
     $(DEVICE_PREBUILT)/usr/idc/sholes-keypad.idc:system/usr/idc/sholes-keypad.idc \
     $(DEVICE_PREBUILT)/usr/keylayout/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
