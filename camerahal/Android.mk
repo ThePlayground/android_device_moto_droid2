@@ -1,6 +1,6 @@
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_MOTO_CAMERA),true)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2)
 
 include $(CLEAR_VARS)
 
