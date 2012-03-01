@@ -4,12 +4,13 @@ ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),droid2)
 
 include $(CLEAR_VARS)
 
+LOCAL_MODULE_TAGS    := optional
 LOCAL_MODULE_PATH    := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 LOCAL_MODULE         := camera.$(TARGET_BOARD_PLATFORM)
 LOCAL_SRC_FILES      := cameraHal.cpp
-LOCAL_MODULE_TAGS    := optional
+LOCAL_PRELINK_MODULE := false
 
-LOCAL_SRC_FILES += v4l2_utils.c overlay.cpp
+LOCAL_C_INCLUDES += $(ANDROID_BUILD_TOP)/frameworks/base/include
 
 LOCAL_SHARED_LIBRARIES += \
     liblog \
@@ -19,9 +20,9 @@ LOCAL_SHARED_LIBRARIES += \
     libmedia \
     libhardware \
     libcamera_client \
-    libcamera
-
-LOCAL_SHARED_LIBRARIES += libdl
+    libdl \
+    libui \
+    libcamera \
 
 include $(BUILD_SHARED_LIBRARY)
 
