@@ -29,8 +29,4 @@ include external/stlport/libstlport.mk
 
 include $(BUILD_SHARED_LIBRARY)
 
-ifeq ($(OMAP_ENHANCEMENT),true)
-LOCAL_CFLAGS += -DOMAP_ENHANCEMENT
-endif
-
 endif
