@@ -89,19 +89,11 @@ PRODUCT_PACKAGES += \
     dspexec \
     libbridge \
     libstagefrighthw \
-    libstagefright_omx \
-    libOMX_Core \
-    libOMX.TI.AAC.decode \
-    libOMX.TI.AAC.decode \
-    libOMX.TI.AMR.decode \
-    libOMX.TI.AMR.encode \
-    libOMX.TI.JPEG.Encoder \
-    libOMX.TI.MP3.decode \
-    libOMX.TI.Video.Decoder \
-    libOMX.TI.Video.encoder \
-    libOMX.TI.WBAMR.decode \
-    libOMX.TI.WBAMR.encode \
-    libOMX.TI.WMA.decode
+    libOmxCore \
+    libmm-omxcore \
+    libdivxdrmdecrypt \
+    libOmxVenc \
+    libOmxVdec
 
 # Radio
 PRODUCT_PACKAGES += \
